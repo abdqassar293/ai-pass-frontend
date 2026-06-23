@@ -20,8 +20,6 @@ A React + Tailwind frontend for the [AI-Pass backend](https://ai-pass-backend-7z
 - **lucide-react** (icons)
 - **react-hot-toast** (notifications)
 
-JavaScript (not TypeScript) was chosen for speed — TS was optional in the brief.
-
 ## Frontend Architecture
 
 ```
@@ -67,6 +65,7 @@ Tailwind only, with one custom color (`brand`) used consistently for primary act
 ### Responsive Design
 
 The layout collapses gracefully:
+
 - **Desktop:** sidebar + content
 - **Tablet:** same, denser
 - **Mobile:** sidebar slides in via hamburger menu; tables convert to card lists
@@ -74,6 +73,7 @@ The layout collapses gracefully:
 ## API Integration Approach
 
 ### Authentication
+
 - On login/register, the JWT returned by `/auth/login` or `/auth/register` is stored in `localStorage` along with the user's email and role.
 - An **axios request interceptor** attaches `Authorization: Bearer <token>` to every outgoing request automatically.
 - An **axios response interceptor** watches for `401` responses, clears storage, and redirects to `/login` — handling expired tokens transparently.
@@ -81,15 +81,15 @@ The layout collapses gracefully:
 
 ### Endpoints used
 
-| Page | Endpoint |
-|---|---|
-| Login | `POST /auth/login` |
-| Register | `POST /auth/register` |
-| Dashboard | `GET /tasks` (for stats + recent list) |
-| Task Create | `POST /tasks` |
-| Task History | `GET /tasks` |
-| Task Details | `GET /tasks/{id}` |
-| Agents | `GET /agents`, `POST /agents/run` |
+| Page         | Endpoint                               |
+| ------------ | -------------------------------------- |
+| Login        | `POST /auth/login`                     |
+| Register     | `POST /auth/register`                  |
+| Dashboard    | `GET /tasks` (for stats + recent list) |
+| Task Create  | `POST /tasks`                          |
+| Task History | `GET /tasks`                           |
+| Task Details | `GET /tasks/{id}`                      |
+| Agents       | `GET /agents`, `POST /agents/run`      |
 
 ### Error Handling
 
@@ -98,34 +98,6 @@ Every API call is wrapped in `try/catch`, with `react-hot-toast` notifications f
 ### Environment Configuration
 
 The backend URL is read from `VITE_API_URL` (set in `.env` locally and in Vercel's environment variables for production). This means the same build can target a local backend during dev and the live one in production with no code change.
-
-## Running Locally
-
-### Prerequisites
-- Node.js 18+
-- npm (or pnpm / yarn)
-
-### Steps
-
-```bash
-# 1. Install deps
-npm install
-
-# 2. Configure backend URL
-echo "VITE_API_URL=https://ai-pass-backend-7zli.onrender.com" > .env
-
-# 3. Start dev server
-npm run dev
-```
-
-Visit http://localhost:5173.
-
-### Build for production
-
-```bash
-npm run build         # outputs to /dist
-npm run preview       # serves /dist locally for verification
-```
 
 ## Deployment (Vercel)
 
@@ -139,21 +111,6 @@ npm run preview       # serves /dist locally for verification
 7. Click Deploy.
 
 The included `vercel.json` rewrites all routes to `/` so React Router's client-side routes (e.g. `/tasks/5`) work on direct page loads and refreshes.
-
-## Features Implemented
-
-| Requirement | Status |
-|---|---|
-| Login screen with JWT + session persistence | ✅ |
-| Register screen | ✅ |
-| Dashboard with stats, quick actions, recent activity | ✅ |
-| Task creation with type selector and content input | ✅ |
-| Task history list with status + date | ✅ |
-| Task details page (input, output, decision, confidence, timestamp) | ✅ |
-| Agent screen connected to `/agents/run` | ✅ |
-| AI-Pass Apps section (Invoice AI, HR AI, Supply Chain AI, Analysis Studio) | ✅ |
-| Responsive (desktop, tablet, mobile) | ✅ |
-| Live deployment | ✅ |
 
 ## Future Improvements
 
