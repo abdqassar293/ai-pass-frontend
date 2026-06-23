@@ -4,7 +4,7 @@ A React + Tailwind frontend for the [AI-Pass backend](https://ai-pass-backend-7z
 
 ## Live Demo
 
-- **Live URL:** `https://ai-pass-frontend-five.vercel.app/login`
+- **Live URL:** https://ai-pass-frontend-five.vercel.app/login
 - **Backend API:** https://ai-pass-backend-7zli.onrender.com
 - **API Docs:** https://ai-pass-backend-7zli.onrender.com/swagger-ui.html
 
