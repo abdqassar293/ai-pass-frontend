@@ -1,15 +1,14 @@
 # AI-Pass Frontend
 
-A React + Tailwind frontend for the [AI-Pass backend](https://ai-pass-backend-7zli.onrender.com), built as a 24-hour extension task.
+A React + Tailwind frontend for the [AI-Pass backend](https://ai-pass-backend-7zli.onrender.com)
 
 ## Live Demo
 
-- **Live URL:** `<YOUR_VERCEL_URL>`
+- **Live URL:** `https://ai-pass-frontend-five.vercel.app/login`
 - **Backend API:** https://ai-pass-backend-7zli.onrender.com
 - **API Docs:** https://ai-pass-backend-7zli.onrender.com/swagger-ui.html
-- **GitHub:** `<YOUR_REPO_URL>`
 
-> ⏱️ The backend is hosted on Render's free tier and sleeps after 15 minutes of inactivity. The first request may take ~30–60 seconds while it wakes up.
+> ⏱️ The backend is hosted on Render's free tier and sleeps after 15 minutes of inactivity. The first request may take ~60–120 seconds while it wakes up.
 
 ## Stack
 
@@ -118,10 +117,8 @@ The included `vercel.json` rewrites all routes to `/` so React Router's client-s
 - **TanStack Query** — automatic caching, refetching, optimistic updates instead of manual `useEffect`/`useState`
 - **Skeleton loaders** — replace the simple "Loading…" text with shimmer placeholders for a smoother feel
 - **Dark mode** — Tailwind's `dark:` variants would be ~1 hour of polish
-- **Pagination on task history** for users with hundreds of tasks
 - **Real-time updates** via WebSockets when tasks switch from PENDING → COMPLETED (once the backend goes async)
 - **Functional AI-Pass Apps** — wire each placeholder card to actual specialized workflows on the backend
-- **Admin dashboard** — leveraging the existing `ADMIN` role for cross-user visibility
 - **Better empty/error states** with illustrations
 - **End-to-end tests** with Playwright covering the auth → create task → view details flow
 
