@@ -6,7 +6,6 @@ import Card from "../components/ui/Card.jsx";
 import { Input, TextArea } from "../components/ui/Input.jsx";
 import Button from "../components/ui/Button.jsx";
 import { createTask } from "../api/tasks.js";
-import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 
 const TASK_TYPES = [
@@ -32,7 +31,6 @@ const SAMPLES = {
 };
 
 export default function TaskCreate() {
-  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [taskType, setTaskType] = useState("DOCUMENT_SUMMARY");
   const [inputText, setInputText] = useState("");
