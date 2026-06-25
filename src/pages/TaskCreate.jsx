@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FileText, Receipt, Sparkles } from "lucide-react";
 import Card from "../components/ui/Card.jsx";
@@ -31,11 +31,11 @@ const SAMPLES = {
 };
 
 export default function TaskCreate() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [taskType, setTaskType] = useState("DOCUMENT_SUMMARY");
   const [inputText, setInputText] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   const onSubmit = async (e) => {
@@ -44,6 +44,7 @@ export default function TaskCreate() {
       navigate("/login");
       return;
     }
+    setSubmitting(true);
     try {
       const task = await createTask({ title, taskType, inputText });
       toast.success("Task executed successfully");
@@ -155,16 +156,10 @@ export default function TaskCreate() {
             >
               Cancel
             </Button>
-            {user ? (
-              <Button type="submit" disabled={submitting}>
-                <Sparkles className="h-4 w-4" />
-                {submitting ? "Running…" : "Run task"}
-              </Button>
-            ) : (
-              <Link to="/login">
-                <Button type="button">Sign in to run</Button>
-              </Link>
-            )}
+            <Button type="submit" disabled={submitting}>
+              <Sparkles className="h-4 w-4" />
+              {submitting ? "Running…" : "Run task"}
+            </Button>
           </div>
         </form>
       </Card>
