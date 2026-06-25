@@ -1,18 +1,19 @@
-import { Outlet, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import { Menu, LogOut } from 'lucide-react'
-import Sidebar from './Sidebar.jsx'
-import { useAuth } from '../auth/AuthContext.jsx'
+import { Outlet, useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+import { Menu, LogOut } from "lucide-react";
+import Sidebar from "./Sidebar.jsx";
+import Button from "./ui/Button.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { user, logout } = useAuth()
-  const navigate = useNavigate()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    navigate('/login')
-  }
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -30,23 +31,36 @@ export default function Layout() {
 
           <div className="hidden lg:block" />
 
-          <div className="flex items-center gap-3">
-            <div className="text-right">
-              <div className="text-sm font-medium text-gray-900">{user?.email}</div>
-              <div className="text-xs text-gray-500">{user?.role}</div>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <div className="text-sm font-medium text-gray-900">
+                  {user.email}
+                </div>
+                <div className="text-xs text-gray-500">{user.role}</div>
+              </div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
+                {user.email[0].toUpperCase()}
+              </div>
+              <button
+                onClick={handleLogout}
+                className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
+                aria-label="Log out"
+                title="Log out"
+              >
+                <LogOut className="h-5 w-5" />
+              </button>
             </div>
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
-              {user?.email?.[0]?.toUpperCase() || '?'}
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link to="/login">
+                <Button variant="ghost">Sign in</Button>
+              </Link>
+              <Link to="/register">
+                <Button>Sign up</Button>
+              </Link>
             </div>
-            <button
-              onClick={handleLogout}
-              className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
-              aria-label="Log out"
-              title="Log out"
-            >
-              <LogOut className="h-5 w-5" />
-            </button>
-          </div>
+          )}
         </header>
 
         <main className="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
@@ -54,5 +68,5 @@ export default function Layout() {
         </main>
       </div>
     </div>
-  )
+  );
 }
